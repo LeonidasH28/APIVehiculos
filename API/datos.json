@@ -1,0 +1,167 @@
+{
+  "vehiculos": [
+    {
+      "id": 1,
+      "marca": "Ford",
+      "modelo": "Focus 2019",
+      "patente": "XYZ789",
+      "kilometraje": 75000,
+      "estado": "En mantenimiento",
+      "fechaDeAdquisicion": "2022-06-10"
+    },
+    {
+      "id": 2,
+      "marca": "ferrari",
+      "modelo": "Focus 2019",
+      "patente": "XYZ789",
+      "kilometraje": 75000,
+      "estado": "inactivo",
+      "fechaDeAdquisicion": "2022-06-10"
+    },
+    {
+      "id": 3,
+      "marca": "Ford",
+      "modelo": "Focus 2021",
+      "patente": "LMN456",
+      "kilometraje": 30000,
+      "estado": "Disponible",
+      "fechaDeAdquisicion": "2023-05-20"
+    },
+    {
+      "id": 4,
+      "marca": "Chevrolet",
+      "modelo": "Cruze 2022",
+      "patente": "DEF789",
+      "kilometraje": 12000,
+      "estado": "Disponible",
+      "fechaDeAdquisicion": "2023-09-10"
+    },
+    {
+      "id": 5,
+      "marca": "Lamborgini",
+      "modelo": "Sport20",
+      "patente": "2034403",
+      "kilometraje": 0,
+      "estado": "activo",
+      "fechaDeAdquisicion": "2024-09-10"
+    }
+  ],
+  "mantenimiento": [
+    {
+      "id": 1,
+      "idVehiculo": 1,
+      "tipo": "Preventivo",
+      "fechaProgramada": "2023-11-15",
+      "fechaRealizacion": "2023-11-16",
+      "costo": 15000,
+      "proveedor": "Taller-Casino-Magic",
+      "estado": "inactivo"
+    },
+    {
+      "id": 2,
+      "idVehiculo": 2,
+      "tipo": "Correctivo",
+      "fechaProgramada": "2023-11-20",
+      "fechaRealizacion": "2023-11-23",
+      "proveedor": "Taller-Rapido",
+      "estado": "activo"
+    },
+    {
+      "id": 3,
+      "idVehiculo": 1,
+      "tipo": "Preventivo",
+      "fechaProgramada": "2023-11-15",
+      "fechaRealizacion": "2023-11-16",
+      "costo": 15000,
+      "proveedor": "Taller Mecánico Casino Magic",
+      "estado": "inactivo"
+    }
+  ],
+  "proveedores": [
+    {
+      "id": 1,
+      "nombre": "Taller Mecánico Casino Magic",
+      "telefono": "123456789",
+      "direccion": "Av. san martin",
+      "servicios": [
+        "Cambio de aceite",
+        "Reparación de motor",
+        "Mantenimiento general"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Taller widi",
+      "telefono": "987654321",
+      "direccion": "Calle Jujuy 123",
+      "servicios": [
+        "Revisión de frenos",
+        "Cambio de llantas"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Taller arreto Casino Magic",
+      "telefono": "1234jdjd56789",
+      "direccion": "Av.Belgrano",
+      "servicios": [
+        "inflar cubiertas",
+        "Reparación de motor",
+        "Mantenimiento general"
+      ]
+    }
+  ],
+  "conductores": [
+    {
+      "id": 1,
+      "nombreCompleto": "Juan Zelaye",
+      "carnet": "ABC123456",
+      "idVehiculo": 1,
+      "fechaDeUso": "2023-10-01",
+      "kilometrajeRecorrido": 150
+    },
+    {
+      "id": 2,
+      "nombreCompleto": "María García",
+      "carnet": "XYZ987654"
+    },
+    {
+      "id": 3,
+      "nombreCompleto": "Cordero",
+      "carnet": "ERR303",
+      "idVehiculo": 3,
+      "fechaDeUso": "2025-10-01",
+      "kilometrajeRecorrido": 100
+    }
+  ],
+  "reservas": [
+    {
+      "id": 1,
+      "vehiculoId": 1,
+      "fechaInicio": "2023-11-25",
+      "fechaFin": "2023-11-26",
+      "estado": "activa"
+    },
+    {
+      "id": 2,
+      "vehiculoId": 3,
+      "fechaInicio": "2023-12-01",
+      "fechaFin": "2023-12-03",
+      "estado": "inactivo"
+    },
+    {
+      "id": 3,
+      "vehiculoId": 3,
+      "fechaInicio": "2023-12-01",
+      "fechaFin": "2023-12-03",
+      "estado": "inactivo"
+    },
+    {
+      "id": 4,
+      "vehiculoId": 3,
+      "fechaInicio": "2023-12-01",
+      "fechaFin": "2023-12-03",
+      "estado": "activa"
+    }
+  ]
+}
