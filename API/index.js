@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 
+// Función para leer datos 
 const leerDatos = () => {
     try {
         const datos = fs.readFileSync("./datos.json", "utf8");
@@ -16,6 +17,7 @@ const leerDatos = () => {
     }
 };
 
+// Función para escribir datos 
 const escribirDatos = (datos) => {
     try {
         fs.writeFileSync("./datos.json", JSON.stringify(datos, null, 2));
@@ -24,16 +26,20 @@ const escribirDatos = (datos) => {
     }
 };
 
+// Ruta principal para comprobar si el servidor está en funcionando
 app.get('/', (req, res) => {
     res.send("API escuchando en el puerto " + port);
 });
 
-// Vehículos
+/** Vehículos */
+
+// Listar todos los vehículos
 app.get('/ListarVehiculos', (req, res) => {
     const datos = leerDatos();
     res.json(datos.vehiculos || []);
 });
 
+// Buscar un vehículo por ID
 app.get('/BuscarVehiculo/:id', (req, res) => {
     const datos = leerDatos();
     const id = parseInt(req.params.id);
@@ -45,6 +51,7 @@ app.get('/BuscarVehiculo/:id', (req, res) => {
     }
 });
 
+// Buscar vehículos por estado (activo, inactivo, etc.)
 app.get('/BuscarVehiculosPorEstado/:estado', (req, res) => {
     const datos = leerDatos();
     const estado = req.params.estado;
@@ -57,18 +64,20 @@ app.get('/BuscarVehiculosPorEstado/:estado', (req, res) => {
     }
 });
 
+// Registrar un nuevo vehículo
 app.post('/SubirVehiculo', (req, res) => {
     const datos = leerDatos();
     const nuevoVehiculo = {
-        id: datos.vehiculos.length + 1,
+        id: datos.vehiculos.length + 1, // Generar un nuevo ID automáticamente
         ...req.body,
-        estado: "activo"
+        estado: "activo" // Asignar estado inicial
     };
     datos.vehiculos.push(nuevoVehiculo);
     escribirDatos(datos);
     res.json(nuevoVehiculo);
 });
 
+// Actualizar información de un vehículo
 app.put('/ActualizarVehiculo/:id', (req, res) => {
     const datos = leerDatos();
     const id = parseInt(req.params.id);
@@ -82,11 +91,11 @@ app.put('/ActualizarVehiculo/:id', (req, res) => {
     }
 });
 
-
+// Cambiar el estado de un vehículo (activo, inactivo, en reparación)
 app.delete('/EstadoVehiculo/:id', (req, res) => {
     const datos = leerDatos();
     const id = parseInt(req.params.id);
-    const { estado } = req.body; // Estado que se desea cambiar, proporcionado en el cuerpo de la solicitud
+    const { estado } = req.body; // Nuevo estado cambiado por la solicitud
 
     const vehiculo = datos.vehiculos.find(v => v.id === id);
     
@@ -102,27 +111,25 @@ app.delete('/EstadoVehiculo/:id', (req, res) => {
     res.json({ message: `Estado del vehículo cambiado a ${estado}.`, vehiculo });
 });
 
-// Mantenimiento
+/** Mantenimiento */
+
+// Listar todas las órdenes de mantenimiento
 app.get('/ListarMantenimientos', (req, res) => {
     const datos = leerDatos();
     res.json(datos.mantenimiento || []);
 });
 
-// Endpoint para subir un nuevo mantenimiento
+// Registrar una nueva orden de mantenimiento
 app.post('/SubirMantenimiento', (req, res) => {
     const datos = leerDatos();
-
-    
     const nuevoId = datos.mantenimiento.length > 0 ? datos.mantenimiento[datos.mantenimiento.length - 1].id + 1 : 1;
-
-   
     const nuevaOrden = {
         id: nuevoId,
-        ...req.body,  
-        estado: "inactivo"
+        ...req.body,
+        estado: "inactivo" // Estado inicial de la orden
     };
 
-    
+    // Verificar si el vehículo existe y está activo
     const vehiculo = datos.vehiculos.find(v => v.id === nuevaOrden.idVehiculo);
     if (!vehiculo) {
         return res.status(404).json({ message: "Vehículo no encontrado" });
@@ -132,19 +139,14 @@ app.post('/SubirMantenimiento', (req, res) => {
         return res.status(400).json({ message: "El vehículo no está activo y no se puede registrar en mantenimiento." });
     }
 
-    
-    vehiculo.estado = "En mantenimiento";
-
-    
+    vehiculo.estado = "En mantenimiento"; // Cambiar estado del vehículo
     datos.mantenimiento.push(nuevaOrden);
-    
     escribirDatos(datos);
 
-   
     res.json({ message: "Orden de mantenimiento registrada", orden: nuevaOrden });
 });
 
-
+// Cambiar el estado de una orden de mantenimiento
 app.delete('/EstadoMantenimiento/:id', (req, res) => {
     const datos = leerDatos();
     const id = parseInt(req.params.id);
@@ -154,16 +156,16 @@ app.delete('/EstadoMantenimiento/:id', (req, res) => {
         return res.status(404).json({ message: "Mantenimiento no encontrado." });
     }
 
-    
     mantenimiento.estado = mantenimiento.estado === "activo" ? "inactivo" : "activo";
     escribirDatos(datos);
 
     res.json({ message: `Estado del mantenimiento cambiado a ${mantenimiento.estado}.`, mantenimiento });
-});
+}); // se cambia el estado de activo a inactivo i viceversa
+
 // Endpoint para buscar mantenimiento por ID
 app.get('/Buscarmantenimiento/:id', (req, res) => {
     const datos = leerDatos();
-    const id = parseInt(req.params.id); // Obtener el ID de los parámetros de la ruta
+    const id = parseInt(req.params.id); 
 
     // Buscar el mantenimiento por ID
     const mantenimiento = datos.mantenimiento?.find(m => m.id === id);
@@ -178,7 +180,7 @@ app.get('/Buscarmantenimiento/proveedor/:nombreProveedor', (req, res) => {
     const datos = leerDatos();
     const nombreProveedor = req.params.nombreProveedor.toLowerCase();
 r
-    const mantenimientosFiltrados = datos.mantenimiento?.filter(m => m.proveedor.toLowerCase() === nombreProveedor);
+    const mantenimientosFiltrados = datos.mantenimiento?.filter(m => m.proveedor.toLowerCase() === nombreProveedor);//filtrar por nombre del proveedor
 
     if (mantenimientosFiltrados && mantenimientosFiltrados.length > 0) {
         res.json(mantenimientosFiltrados);
@@ -191,7 +193,7 @@ r
 app.get('/ListarProveedores', (req, res) => {
     const datos = leerDatos();
     res.json(datos.proveedores || []);
-});
+});//listar todos los proveedores
 
 app.get('/BuscarProveedorPorNombre/:nombre', (req, res) => {
     const datos = leerDatos();
@@ -233,7 +235,7 @@ app.post('/SubirProveedor', (req, res) => {
     const datos = leerDatos();
 
 
-    const nuevoId = datos.proveedores.length > 0 ? datos.proveedores[datos.proveedores.length - 1].id + 1 : 1;
+    const nuevoId = datos.proveedores.length > 0 ? datos.proveedores[datos.proveedores.length - 1].id + 1 : 1;// se crea un id con un numero mas al anterior
 
    
     const nuevoProveedor = {
@@ -268,7 +270,7 @@ app.get('/BuscarConductorPorId/:id', (req, res) => {
         res.status(404).json({ message: "Conductor no encontrado." });
     }
 });
-// Endpoint para subir un nuevo conductor
+// nuevo conductor
 app.post('/SubirConductor', (req, res) => {
     const datos = leerDatos();
 
@@ -287,6 +289,7 @@ app.post('/SubirConductor', (req, res) => {
 
     res.status(201).json({ message: "Conductor registrado", conductor: nuevoConductor });
 });
+//cambiar datos de clientes
 app.put('/ActualizarCliente/:id', (req, res) => {
     const datos = leerDatos();
     const id = parseInt(req.params.id); 
@@ -299,7 +302,7 @@ app.put('/ActualizarCliente/:id', (req, res) => {
     } else {
         res.status(404).send("Cliente no encontrado."); // Responder con un error si no se encuentra el cliente
     }
-});
+}); 
 // Reservas
 app.get('/ListarReservas', (req, res) => {
     const datos = leerDatos();
