@@ -311,17 +311,17 @@ app.post('/SubirConductor', (req, res) => {
     res.status(201).json({ message: "Conductor registrado", conductor: nuevoConductor });
 });
 //cambiar datos de clientes
-app.put('/ActualizarCliente/:id', (req, res) => {
+app.put('/ActualizarConductor/:id', (req, res) => {
     const datos = leerDatos();
     const id = parseInt(req.params.id); 
-    const clienteIndex = datos.clientes.findIndex(c => c.id === id); 
+    const clienteIndex = datos.conductores.findIndex(c => c.id === id); 
     if (clienteIndex !== -1) {
-        // Actualizar los datos del cliente
-        datos.clientes[clienteIndex] = { ...datos.clientes[clienteIndex], ...req.body };
+        // Actualizar los datos del conductor
+        datos.conductores[clienteIndex] = { ...datos.conductores[clienteIndex], ...req.body };
         escribirDatos(datos); 
-        res.json({ message: "Cliente actualizado" }); 
+        res.json({ message: "Conductor actualizado" }); 
     } else {
-        res.status(404).send("Cliente no encontrado."); // Responder con un error si no se encuentra el cliente
+        res.status(404).send("Conductor no encontrado."); // Responder con un error si no se encuentra el conductor
     }
 });
 // Reservas

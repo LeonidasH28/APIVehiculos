@@ -8,7 +8,7 @@
       "kilometraje": 75000,
       "estado": "En mantenimiento",
       "fechaDeAdquisicion": "2022-06-10",
-      "TipoVehiculo":"Auto"
+      "TipoVehiculo": "Auto"
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "kilometraje": 75000,
       "estado": "inactivo",
       "fechaDeAdquisicion": "2022-06-10",
-      "TipoVehiculo":"Auto"
+      "TipoVehiculo": "Auto"
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "kilometraje": 30000,
       "estado": "Disponible",
       "fechaDeAdquisicion": "2023-05-20",
-      "TipoVehiculo":"Auto"
+      "TipoVehiculo": "Auto"
     },
     {
       "id": 4,
@@ -38,7 +38,7 @@
       "kilometraje": 12000,
       "estado": "Disponible",
       "fechaDeAdquisicion": "2023-09-10",
-      "TipoVehiculo":"Auto"
+      "TipoVehiculo": "Auto"
     },
     {
       "id": 5,
@@ -48,7 +48,7 @@
       "kilometraje": 0,
       "estado": "activo",
       "fechaDeAdquisicion": "2024-09-10",
-      "TipoVehiculo":"Camion"
+      "TipoVehiculo": "Camion"
     }
   ],
   "mantenimiento": [
@@ -120,7 +120,7 @@
     {
       "id": 1,
       "nombreCompleto": "Juan Zelaye",
-      "carnet": "ABC123456",
+      "carnet": "ppppp",
       "idVehiculo": 1,
       "fechaDeUso": "2023-10-01",
       "kilometrajeRecorrido": 150
