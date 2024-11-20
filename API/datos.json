@@ -7,7 +7,8 @@
       "patente": "XYZ789",
       "kilometraje": 75000,
       "estado": "En mantenimiento",
-      "fechaDeAdquisicion": "2022-06-10"
+      "fechaDeAdquisicion": "2022-06-10",
+      "TipoVehiculo":"Auto"
     },
     {
       "id": 2,
@@ -16,7 +17,8 @@
       "patente": "XYZ789",
       "kilometraje": 75000,
       "estado": "inactivo",
-      "fechaDeAdquisicion": "2022-06-10"
+      "fechaDeAdquisicion": "2022-06-10",
+      "TipoVehiculo":"Auto"
     },
     {
       "id": 3,
@@ -25,7 +27,8 @@
       "patente": "LMN456",
       "kilometraje": 30000,
       "estado": "Disponible",
-      "fechaDeAdquisicion": "2023-05-20"
+      "fechaDeAdquisicion": "2023-05-20",
+      "TipoVehiculo":"Auto"
     },
     {
       "id": 4,
@@ -34,16 +37,18 @@
       "patente": "DEF789",
       "kilometraje": 12000,
       "estado": "Disponible",
-      "fechaDeAdquisicion": "2023-09-10"
+      "fechaDeAdquisicion": "2023-09-10",
+      "TipoVehiculo":"Auto"
     },
     {
       "id": 5,
-      "marca": "Lamborgini",
+      "marca": "Scania",
       "modelo": "Sport20",
       "patente": "2034403",
       "kilometraje": 0,
       "estado": "activo",
-      "fechaDeAdquisicion": "2024-09-10"
+      "fechaDeAdquisicion": "2024-09-10",
+      "TipoVehiculo":"Camion"
     }
   ],
   "mantenimiento": [
